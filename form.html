@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Student Registration Form</h2>
+
+    <form id="registrationForm" onsubmit="return validateForm()">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required /><br /><br />
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required /><br /><br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" />
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="registrationDetails"></div>
+
+    <script>
+      function validateForm() {
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const registrationDetails = document.getElementById(
+          "registrationDetails"
+        );
+
+        if (firstName.value === "") {
+          alert("Please enter your first name.");
+          return false;
+        }
+
+        if (lastName.value === "") {
+          alert("Please enter your last name.");
+          return false;
+        }
+
+        if (email.value === "") {
+          alert("Please enter your email address.");
+          return false;
+        }
+
+        if (phone.value === "") {
+          alert("Please enter your phone number.");
+          return false;
+        }
+
+        registrationDetails.innerHTML = `<p>First Name: ${firstName.value}</p><p>Last Name: ${lastName.value}</p><p>Email: ${email.value}</p><p>Phone Number: ${phone.value}</p>`;
+        return false;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const formElements = document.querySelectorAll("input, textarea");
+        formElements.forEach((element) => {
+          element.addEventListener("focus", (event) => {
+            event.target.value = "";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
